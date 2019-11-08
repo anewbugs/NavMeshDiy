@@ -11,11 +11,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import navtest.load.NavMeshLoad;
 import navtest.mesh.NavMeshInfo;
+import navtest.mesh.Point;
 import navtest.mesh.Triangle;
+import navtest.navigation.Navigator;
+import navtest.navigation.Route;
+
+import java.util.ArrayList;
 
 public class Main extends Application {
-public static final int size = 10;
+    public static final int size = 20;
     public static final int move = 50;
+    public static final int s = 1;
     public static void main(String[] args) {
         launch(args);
     }
@@ -26,7 +32,7 @@ public static final int size = 10;
         public void start(Stage primaryStage) {
             primaryStage.setTitle("Drawing Operations Test");
             Group root = new Group();
-            Canvas canvas = new Canvas(1000, 1000);
+            Canvas canvas = new Canvas(2000, 2000);
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -38,33 +44,45 @@ public static final int size = 10;
 
         private void drawShapes(GraphicsContext gc) {
             NavMeshLoad navMeshLoad = new NavMeshLoad();
-            NavMeshInfo navMeshInfo = navMeshLoad.load("s3.obj");
-            gc.setFill(Color.GREEN);
+            NavMeshInfo navMeshInfo = navMeshLoad.load("s3-2.obj");
+            int n =0;
+            for (ArrayList<Triangle> value : navMeshInfo.pointIndexes.values()) {
+                n = value.size() > n ? value.size() : n;
+            }
+
+            System.out.println(n);
+
+            Route route = Route.routeFactory(navMeshInfo,new Point(  0f, 0f, 0f),new Point(0f, 0, 30f));
+            Navigator navigator = new Navigator();
+            navigator.start(route);
             gc.setStroke(Color.BLUE);
-            gc.setLineWidth(1);
+            gc.setLineWidth(0.5);
             for (Triangle triangle : navMeshInfo.allTriangle) {
                 DrawTiangle(triangle,gc);
             }
-            gc.strokeLine(0,0,0,10);
+            gc.setStroke(Color.RED);
+            for (Triangle triangle : route.viaTriangle) {
+                DrawTiangle(triangle,gc);
+            }
 
         }
 
 //        private void DrawTiangle(Triangle triangle,GraphicsContext gc){
-//            gc.strokeLine((triangle.a.x / 10000 +move) *size,(triangle.a.z / 10000 +move) *size,(triangle.b.x/ 10000  +move) *size,(triangle.b.z/ 10000  +move) *size);
-//            gc.strokeLine((triangle.a.x/ 10000 +move) *size,(triangle.a.z /10000 +move) *size,(triangle.c.x /10000 +move) *size,(triangle.c.z/10000 +move) *size);
-//            gc.strokeLine((triangle.c.x/10000+move) *size,(triangle.c.z /10000 +move)*size,(triangle.b.x/10000 +move)*size,(triangle.b.z /10000 +move)*size);
+//            gc.strokeLine((triangle.a.x *s +move) *size,(triangle.a.z *s +move) *size,(triangle.b.x *s +move) *size,(triangle.b.z *s +move) *size);
+//            gc.strokeLine((triangle.a.x *s +move) *size,(triangle.a.z *s +move) *size,(triangle.c.x *s +move) *size,(triangle.c.z *s +move) *size);
+//            gc.strokeLine((triangle.c.x *s +move) *size,(triangle.c.z *s +move) *size,(triangle.b.x *s +move) *size,(triangle.b.z *s +move) *size);
 //        }
 
         private void DrawTiangle(Triangle triangle,GraphicsContext gc){
-            gc.strokeLine((triangle.a.z / 10000 +move) *size,(triangle.a.x / 10000 +move) *size,(triangle.b.z/ 10000  +move) *size,(triangle.b.x/ 10000  +move) *size);
-            gc.strokeLine((triangle.a.z /10000 +move) *size,(triangle.a.x/ 10000 +move) *size,(triangle.c.z/10000 +move) *size,(triangle.c.x /10000 +move) *size);
-            gc.strokeLine((triangle.c.z /10000 +move)*size,(triangle.c.x/10000 +move) *size,(triangle.b.z /10000 +move)*size ,(triangle.b.x/10000 +move)*size);
+            gc.strokeLine((triangle.a.z *s +move) *size,(triangle.a.x *s +move) *size,(triangle.b.z *s +move) *size,(triangle.b.x *s  +move) *size);
+            gc.strokeLine((triangle.a.z *s +move) *size,(triangle.a.x *s +move) *size,(triangle.c.z *s +move) *size,(triangle.c.x *s +move) *size);
+            gc.strokeLine((triangle.c.z *s +move) *size,(triangle.c.x *s +move) *size,(triangle.b.z *s +move)*size ,(triangle.b.x *s +move)*size);
         }
 
 //        private void DrawTiangle(Triangle triangle,GraphicsContext gc){
-//            gc.strokeLine((triangle.a.x / 10000 +move) *size,(-triangle.a.z / 10000 +move) *size,(triangle.b.x/ 10000  +move) *size,(-triangle.b.z/ 10000  +move) *size);
-//            gc.strokeLine((triangle.a.x/ 10000 +move) *size,(-triangle.a.z /10000 +move) *size,(triangle.c.x /10000 +move) *size,(-triangle.c.z/10000 +move) *size);
-//            gc.strokeLine((triangle.c.x/10000+move) *size,(-triangle.c.z /10000 +move)*size,(triangle.b.x/10000 +move)*size,(-triangle.b.z /10000 +move)*size);
+//            gc.strokeLine((triangle.a.x *s +move) *size,(-triangle.a.z *s +move) *size,(triangle.b.x *s +move) *size,(-triangle.b.z *s +move) *size);
+//            gc.strokeLine((triangle.a.x *s +move) *size,(-triangle.a.z *s +move) *size,(triangle.c.x *s +move) *size,(-triangle.c.z *s +move) *size);
+//            gc.strokeLine((triangle.c.x *s +move) *size,(-triangle.c.z *s +move) *size,(triangle.b.x *s +move) *size,(-triangle.b.z *s +move) *size);
 //        }
 
     }
