@@ -12,8 +12,9 @@ public class Node implements Comparable<Node> {
     // H：是个估值。当前结点到目的结点的预计代
     public float H;
 
-    public Node(Triangle triangle) {
+    public Node(Triangle triangle,float H) {
         this.triangle = triangle;
+        H = H;
     }
 
     public Node(Triangle triangle, Node parentNode,float h) {

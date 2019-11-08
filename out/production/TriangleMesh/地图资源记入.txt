@@ -1,0 +1,30 @@
+NavMesh：地图
+生成地图数据由服务器控制
+
+
+PhysX 和 NavMesh 在服务器的应用
+https://cloud.tencent.com/developer/article/1006053
+RecastNavigation-NavMesh生成原理
+https://blog.csdn.net/you_lan_hai/article/details/77428858
+
+研究：导航网格生成
+http://critterai.org/
+
+导出数据
+https://www.cnblogs.com/yaukey/p/3585226.html
+
+unity A*寻路 （二）读取NavMesh数据
+https://www.bbsmax.com/A/gVdnlYaaJW/
+
+Unity3D架构设计NavMesh寻路
+https://blog.csdn.net/qq_31967569/article/details/81074996
+
+navmesh数据导出和使用
+https://www.cnblogs.com/crazylights/p/5732078.html
+
+//1数据读取
+https://www.cnblogs.com/zouqiang/p/8562543.html
+//2数据保存
+https://www.cnblogs.com/zouqiang/p/8618593.html
+//3数据使用
+https://www.cnblogs.com/zouqiang/p/8758721.html

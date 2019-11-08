@@ -33,7 +33,7 @@ public class Navigator {
         closeList.clear();
 
         //¿ªÊ¼
-        openList.add(new Node(route.startTriangle));
+        openList.add(new Node(route.startTriangle,route.getH(route.startTriangle)));
         moveNodes();
         route.init();
     }

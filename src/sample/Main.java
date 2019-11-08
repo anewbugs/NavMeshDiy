@@ -19,7 +19,7 @@ import navtest.navigation.Route;
 import java.util.ArrayList;
 
 public class Main extends Application {
-    public static final int size = 20;
+    public static final int size = 10;
     public static final int move = 50;
     public static final int s = 1;
     public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class Main extends Application {
         public void start(Stage primaryStage) {
             primaryStage.setTitle("Drawing Operations Test");
             Group root = new Group();
-            Canvas canvas = new Canvas(2000, 2000);
+            Canvas canvas = new Canvas(1000, 1000);
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -52,11 +52,12 @@ public class Main extends Application {
 
             System.out.println(n);
 
-            Route route = Route.routeFactory(navMeshInfo,new Point(  0f, 0f, 0f),new Point(0f, 0, 30f));
+            Route route = Route.routeFactory(navMeshInfo,new Point(  0f, 0f, 0f),new Point(5f, 0, 0f));
             Navigator navigator = new Navigator();
             navigator.start(route);
             gc.setStroke(Color.BLUE);
             gc.setLineWidth(0.5);
+            gc.fillOval((0 *s +move) *size,(0*s +move) *size,10,10);
             for (Triangle triangle : navMeshInfo.allTriangle) {
                 DrawTiangle(triangle,gc);
             }
