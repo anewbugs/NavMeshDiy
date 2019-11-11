@@ -13,6 +13,8 @@ public class NavMeshInfo {
     // 三角形索引 key点 .value点构成的所有三角形  正常情况为三个
     public HashMap<Point,ArrayList<Triangle>> pointIndexes = new HashMap<Point,ArrayList<Triangle>>();
 
+    public HashMap<String, ArrayList<Triangle>> strIndexes = new HashMap<>();
+
     public Triangle getTriangleByPoint(Point point){
         for (Triangle triangle : allTriangle) {
             if (triangle.centroid.y < Triangle.Y_MAX  && triangle.checkInThis(point)){

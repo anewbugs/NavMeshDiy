@@ -3,6 +3,7 @@ package navtest.mesh;
 import navtest.config.PointConfig;
 
 public class Point {
+    public String line;
     public float x ;
     public float y ;//高度坐标
     public float z ;

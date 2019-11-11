@@ -52,15 +52,15 @@ public class Main extends Application {
 
             System.out.println(n);
 
-            Route route = Route.routeFactory(navMeshInfo,new Point(  0f, 0f, 0f),new Point(5f, 0, 0f));
+            Route route = Route.routeFactory(navMeshInfo,new Point(  -33.67773f, 0f, -26.30138f),new Point(36.24456f, 0, -14.75443f));
             Navigator navigator = new Navigator();
             navigator.start(route);
             gc.setStroke(Color.BLUE);
             gc.setLineWidth(0.5);
             gc.fillOval((0 *s +move) *size,(0*s +move) *size,10,10);
-            for (Triangle triangle : navMeshInfo.allTriangle) {
-                DrawTiangle(triangle,gc);
-            }
+//            for (Triangle triangle : navMeshInfo.allTriangle) {
+//                DrawTiangle(triangle,gc);
+//            }
             gc.setStroke(Color.RED);
             for (Triangle triangle : route.viaTriangle) {
                 DrawTiangle(triangle,gc);

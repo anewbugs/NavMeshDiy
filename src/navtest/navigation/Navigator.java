@@ -56,9 +56,15 @@ public class Navigator {
     private void Explore(Node node) {
         //获取邻接三角形
         HashSet<Triangle> contiguousTriangle = new HashSet<Triangle>();
-        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.a));
-        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.b));
-        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.c));
+//        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.a));
+//        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.b));
+//        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.c));
+
+        //todo test
+        contiguousTriangle.addAll(route.navMeshInfo.strIndexes.get(node.triangle.a.line));
+        contiguousTriangle.addAll(route.navMeshInfo.strIndexes.get(node.triangle.b.line));
+        contiguousTriangle.addAll(route.navMeshInfo.strIndexes.get(node.triangle.c.line));
+
         //处理邻接三角形
 
         for (Triangle triangle : contiguousTriangle) {

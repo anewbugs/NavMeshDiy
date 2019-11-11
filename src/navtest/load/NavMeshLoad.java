@@ -59,7 +59,9 @@ public  class NavMeshLoad {
 
             if (Split[0].equals("v"))
             {
-                allPoint.add(new Point(Float.parseFloat(Split[2]), Float.parseFloat(Split[3]), Float.parseFloat(Split[4])));
+                Point point =new Point(Float.parseFloat(Split[2]), Float.parseFloat(Split[3]), Float.parseFloat(Split[4]));
+                point.line = str;
+                allPoint.add(point);
             }
             else if (Split[0].equals( "f"))
             {
@@ -74,6 +76,10 @@ public  class NavMeshLoad {
                 addPointIndexes(navMeshInfo.pointIndexes,allPoint.get(a - 1),triangle);
                 addPointIndexes(navMeshInfo.pointIndexes,allPoint.get(b - 1),triangle);
                 addPointIndexes(navMeshInfo.pointIndexes,allPoint.get(c - 1),triangle);
+
+                addStrIndexes(navMeshInfo.strIndexes,allPoint.get(a - 1),triangle);
+                addStrIndexes(navMeshInfo.strIndexes,allPoint.get(b - 1),triangle);
+                addStrIndexes(navMeshInfo.strIndexes,allPoint.get(c - 1),triangle);
 
             }
         }
@@ -95,6 +101,26 @@ public  class NavMeshLoad {
             list.add(triangle);
             navMeshInfo.put(point,  list);
         }
+
+
+    }
+
+    //测试
+    void addStrIndexes(HashMap<String,ArrayList<Triangle>> navMeshInfo, Point point, Triangle triangle)
+    {
+        if (navMeshInfo.containsKey(point.line))
+        {
+            navMeshInfo.get(point.line).add(triangle);
+            //navMeshInfo[ponit].Add(triangle);
+        }
+        else
+        {
+            ArrayList<Triangle> list = new ArrayList<Triangle>();
+            list.add(triangle);
+            navMeshInfo.put(point.line,  list);
+        }
+
+
     }
 
 }
