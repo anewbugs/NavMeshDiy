@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public  class NavMeshLoad {
-    List<Point> allPoint = new ArrayList<>();
+    //List<Point> allPoint = new ArrayList<>();
     ArrayList<String> allStrPoint = new ArrayList<>();
     HashMap<String , Point> pointHashMap = new HashMap<>();
 
