@@ -91,23 +91,24 @@ public  class NavMeshLoad {
     }
 
     private void addTrianglePointIndexes(NavMeshInfo navMeshInfo, Triangle triangle) {
-        addPointIndexes(navMeshInfo.pointIndexes,triangle.a,triangle);
-        addPointIndexes(navMeshInfo.pointIndexes,triangle.b,triangle);
-        addPointIndexes(navMeshInfo.pointIndexes,triangle.c,triangle);
+        addPointIndexes(navMeshInfo.edgeIndexes, triangle.a, triangle.b, triangle);
+        addPointIndexes(navMeshInfo.edgeIndexes, triangle.a, triangle.c, triangle);
+        addPointIndexes(navMeshInfo.edgeIndexes, triangle.b, triangle.c, triangle);
     }
 
     //添加顶点索引
-    void addPointIndexes(HashMap<Point,ArrayList<Triangle>> navMeshInfo, Point point, Triangle triangle)
+    void addPointIndexes(HashMap<String,ArrayList<Triangle>> navMeshInfo, Point a,Point b, Triangle triangle)
     {
-        if (navMeshInfo.containsKey(point))
+        String edge = Point.midpointString(a, b);
+        if (navMeshInfo.containsKey(edge))
         {
-            navMeshInfo.get(point).add(triangle);
+            navMeshInfo.get(edge).add(triangle);
         }
         else
         {
             ArrayList<Triangle> list = new ArrayList<Triangle>();
             list.add(triangle);
-            navMeshInfo.put(point,  list);
+            navMeshInfo.put(edge,  list);
         }
 
 

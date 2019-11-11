@@ -1,6 +1,7 @@
 package navtest.navigation;
 
 
+import navtest.mesh.Point;
 import navtest.mesh.Triangle;
 
 import java.util.*;
@@ -61,9 +62,9 @@ public class Navigator {
 //        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.c));
 
         //todo test
-        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.a));
-        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.b));
-        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.c));
+        contiguousTriangle.addAll(route.navMeshInfo.edgeIndexes.get(Point.midpointString(node.triangle.a, node.triangle.b)));
+        contiguousTriangle.addAll(route.navMeshInfo.edgeIndexes.get(Point.midpointString(node.triangle.a, node.triangle.c)));
+        contiguousTriangle.addAll(route.navMeshInfo.edgeIndexes.get(Point.midpointString(node.triangle.b, node.triangle.c)));
 
         //处理邻接三角形
 

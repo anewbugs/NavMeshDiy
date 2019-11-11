@@ -30,4 +30,12 @@ public class Point {
     public float getDistance(Point point){
       return (float) Math.sqrt(Math.pow(this.x - point.x , 2) + Math.pow(this.z - this.z ,2));
     }
+
+    public static String midpointString(Point a, Point b){
+        float x = (a.x + b.x) / 2;
+        float y = (a.y + b.y) / 2;
+        float z = (a.z + b.z) / 2;
+
+        return x + " " + y + " " + z;
+    }
 }
