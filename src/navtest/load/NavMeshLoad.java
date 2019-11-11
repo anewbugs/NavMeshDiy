@@ -10,7 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public  class NavMeshLoad {
-    List<Point> allPoint = new ArrayList<Point>();
+    List<Point> allPoint = new ArrayList<>();
+    ArrayList<String> allStrPoint = new ArrayList<>();
+    HashMap<String , Point> pointHashMap = new HashMap<>();
+
 //    public static List<Index> allIndex = new ArrayList<Index>();
 
 
@@ -59,9 +62,12 @@ public  class NavMeshLoad {
 
             if (Split[0].equals("v"))
             {
-                Point point =new Point(Float.parseFloat(Split[2]), Float.parseFloat(Split[3]), Float.parseFloat(Split[4]));
-                point.line = str;
-                allPoint.add(point);
+                allStrPoint.add(str);
+                if (! pointHashMap.containsKey(str)){
+                    Point point =new Point(Float.parseFloat(Split[2]), Float.parseFloat(Split[3]), Float.parseFloat(Split[4]));
+                    pointHashMap.put(str,point);
+                }
+
             }
             else if (Split[0].equals( "f"))
             {
@@ -70,21 +76,24 @@ public  class NavMeshLoad {
                 int c = Integer.parseInt(Split[3]);
                 //todo
                 //allIndex.add(new Index(a,b,c));
-                Triangle triangle = new Triangle(allPoint.get(a - 1), allPoint.get(b - 1), allPoint.get(c-1));
-                navMeshInfo.allCentroid.add(triangle.centroid);
-                navMeshInfo.allTriangle.add(triangle);
-                addPointIndexes(navMeshInfo.pointIndexes,allPoint.get(a - 1),triangle);
-                addPointIndexes(navMeshInfo.pointIndexes,allPoint.get(b - 1),triangle);
-                addPointIndexes(navMeshInfo.pointIndexes,allPoint.get(c - 1),triangle);
 
-                addStrIndexes(navMeshInfo.strIndexes,allPoint.get(a - 1),triangle);
-                addStrIndexes(navMeshInfo.strIndexes,allPoint.get(b - 1),triangle);
-                addStrIndexes(navMeshInfo.strIndexes,allPoint.get(c - 1),triangle);
+                Triangle triangle = createTriangle( a, b, c);
+               // navMeshInfo.allCentroid.add(triangle.centroid);
+                navMeshInfo.allTriangle.add(triangle);
+
+                //三角形点索引
+                addTrianglePointIndexes(navMeshInfo,triangle);
 
             }
         }
 
         return navMeshInfo;
+    }
+
+    private void addTrianglePointIndexes(NavMeshInfo navMeshInfo, Triangle triangle) {
+        addPointIndexes(navMeshInfo.pointIndexes,triangle.a,triangle);
+        addPointIndexes(navMeshInfo.pointIndexes,triangle.b,triangle);
+        addPointIndexes(navMeshInfo.pointIndexes,triangle.c,triangle);
     }
 
     //添加顶点索引
@@ -93,7 +102,6 @@ public  class NavMeshLoad {
         if (navMeshInfo.containsKey(point))
         {
             navMeshInfo.get(point).add(triangle);
-            //navMeshInfo[ponit].Add(triangle);
         }
         else
         {
@@ -105,21 +113,12 @@ public  class NavMeshLoad {
 
     }
 
-    //测试
-    void addStrIndexes(HashMap<String,ArrayList<Triangle>> navMeshInfo, Point point, Triangle triangle)
-    {
-        if (navMeshInfo.containsKey(point.line))
-        {
-            navMeshInfo.get(point.line).add(triangle);
-            //navMeshInfo[ponit].Add(triangle);
-        }
-        else
-        {
-            ArrayList<Triangle> list = new ArrayList<Triangle>();
-            list.add(triangle);
-            navMeshInfo.put(point.line,  list);
-        }
-
+    //根据点索引构造三角形
+    public Triangle createTriangle(int a , int b , int c){
+        return new Triangle(
+                pointHashMap.get(allStrPoint.get(a - 1)),
+                pointHashMap.get(allStrPoint.get(b - 1)),
+                pointHashMap.get(allStrPoint.get(c - 1)));
 
     }
 

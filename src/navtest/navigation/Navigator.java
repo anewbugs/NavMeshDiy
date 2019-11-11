@@ -61,9 +61,9 @@ public class Navigator {
 //        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.c));
 
         //todo test
-        contiguousTriangle.addAll(route.navMeshInfo.strIndexes.get(node.triangle.a.line));
-        contiguousTriangle.addAll(route.navMeshInfo.strIndexes.get(node.triangle.b.line));
-        contiguousTriangle.addAll(route.navMeshInfo.strIndexes.get(node.triangle.c.line));
+        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.a));
+        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.b));
+        contiguousTriangle.addAll(route.navMeshInfo.pointIndexes.get(node.triangle.c));
 
         //处理邻接三角形
 

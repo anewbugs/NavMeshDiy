@@ -9,7 +9,7 @@ public class NavMeshInfo {
     //三角形列表
     public List<Triangle> allTriangle = new ArrayList<Triangle> ();
     //三角形重心
-    public List<Point> allCentroid  = new ArrayList<Point> ();
+    //public List<Point> allCentroid  = new ArrayList<Point> ();
     // 三角形索引 key点 .value点构成的所有三角形  正常情况为三个
     public HashMap<Point,ArrayList<Triangle>> pointIndexes = new HashMap<Point,ArrayList<Triangle>>();
 

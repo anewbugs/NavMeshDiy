@@ -58,9 +58,9 @@ public class Main extends Application {
             gc.setStroke(Color.BLUE);
             gc.setLineWidth(0.5);
             gc.fillOval((0 *s +move) *size,(0*s +move) *size,10,10);
-//            for (Triangle triangle : navMeshInfo.allTriangle) {
-//                DrawTiangle(triangle,gc);
-//            }
+            for (Triangle triangle : navMeshInfo.allTriangle) {
+                DrawTiangle(triangle,gc);
+            }
             gc.setStroke(Color.RED);
             for (Triangle triangle : route.viaTriangle) {
                 DrawTiangle(triangle,gc);
