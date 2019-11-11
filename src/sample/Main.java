@@ -43,7 +43,7 @@ public class Main extends Application {
 
         private void drawShapes(GraphicsContext gc) {
             NavMeshLoad navMeshLoad = new NavMeshLoad();
-            NavMeshInfo navMeshInfo = navMeshLoad.load("s3-2.obj");
+            NavMeshInfo navMeshInfo = navMeshLoad.load("Mian.obj");
             long t = System.currentTimeMillis();
             Route route = Route.routeFactory(navMeshInfo,new Point(  -33.67773f, 0f, -26.30138f),new Point(0f, 0, 0f));
             Navigator navigator = new Navigator();
